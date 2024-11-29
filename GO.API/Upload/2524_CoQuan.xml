@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LogConfig>
+  <SystemLog>
+    <CoQuan CoQuanID="218" CapID="2" CoQuanChaID="1" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="297" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="298" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="299" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="423" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="424" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="425" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="426" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="427" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="428" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="429" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="430" CapID="3" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="523" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="524" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="525" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="526" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="527" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="528" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="529" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="530" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="531" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2632" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2633" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2634" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2635" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2638" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2639" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="2641" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="3573" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="3574" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="3575" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="3576" CapID="11" CoQuanChaID="218" SuDungPM="true" />
+  </SystemLog>
+  <SystemLog>
+    <CoQuan CoQuanID="300" CapID="3" CoQuanChaID="299" SuDungPM="true" />
+  </SystemLog>
+</LogConfig>

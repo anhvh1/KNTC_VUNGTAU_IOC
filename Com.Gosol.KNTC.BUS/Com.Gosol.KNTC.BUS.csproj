@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Idics\**" />
+    <Compile Remove="QuanLy\**" />
+    <EmbeddedResource Remove="Idics\**" />
+    <EmbeddedResource Remove="QuanLy\**" />
+    <None Remove="Idics\**" />
+    <None Remove="QuanLy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="DanhMuc\DanhMucTLoaiKetQuaBUS.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Com.Gosol.KNTC.DAL\Com.Gosol.KNTC.DAL.csproj" />
+    <ProjectReference Include="..\Com.Gosol.KNTC.Models\Com.Gosol.KNTC.Models.csproj" />
+    <ProjectReference Include="..\Workflow\Workflow.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="QuanLy\**" />
+    <EmbeddedResource Remove="QuanLy\**" />
+    <None Remove="QuanLy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Idics\ExaminationDataModel.cs" />
+    <Compile Remove="Idics\GiaoDichModel.cs" />
+    <Compile Remove="Idics\KetQuaDoModel.cs" />
+    <Compile Remove="Idics\MemberEntry.cs" />
+    <Compile Remove="Idics\PhysicalBodyCompositionModel.cs" />
+    <Compile Remove="Idics\SuggestModel.cs" />
+    <Compile Remove="Idics\UserModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Com.Gosol.KNTC.Ultilities\Com.Gosol.KNTC.Ultilities.csproj" />
+  </ItemGroup>
+
+</Project>
