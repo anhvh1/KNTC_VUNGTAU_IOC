@@ -10,6 +10,7 @@ using Com.Gosol.KNTC.Ultilities;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.VariantTypes;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 using System;
@@ -17,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Com.Gosol.KNTC.Models.BaoCao.RowItem;
 using DataTable = Com.Gosol.KNTC.Models.BaoCao.DataTable;
 
 namespace Com.Gosol.KNTC.BUS.BaoCao
@@ -6068,5 +6070,351 @@ namespace Com.Gosol.KNTC.BUS.BaoCao
             return Result;
         }
 
+        public BaseResultModel BaoCao2a_IOC(BaseReportParams p, string ContentRootPath, int RoleID, int CapID, int CoQuanDangNhapID, int CanBoDangNhapID, int TinhDangNhapID, int HuyenDangNhapID)
+        {
+            var Result = new BaseResultModel();
+            try
+            {
+                BaoCaoModel BaoCaoModel = new BaoCaoModel();
+                BaoCaoModel.BieuSo = "";
+                BaoCaoModel.ThongTinSoLieu = "Số liệu tính từ ngày " + (p.TuNgay ?? DateTime.Now).ToString("dd/MM/yyyy") + " đến ngày " + (p.DenNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.TuNgay = (p.TuNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.DenNgay = (p.DenNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.Title = "BÁO CÁO 2a";
+                BaoCaoModel.DataTable = new DataTable();
+                BaoCaoModel.DataTable.TableHeader = new List<TableHeader>();
+                BaoCaoModel.DataTable.TableData = new List<TableData>();
+                #region Header
+                var listTableHeader = new List<TableHeader>();
+                //Cấp 1
+                TableHeader HeaderCol1 = new TableHeader(1, 0, "Đơn vị", "width: 215px", ref listTableHeader);
+                TableHeader HeaderCol2 = new TableHeader(2, 0, "Tiếp thường xuyên", "", ref listTableHeader);
+                TableHeader HeaderCol3 = new TableHeader(3, 0, "Tiếp định kỳ và đột xuất của Lãnh đạo", "", ref listTableHeader);
+                TableHeader HeaderCol4 = new TableHeader(4, 0, "Nội dung tiếp công dân (số vụ việc)", "", ref listTableHeader);
+                TableHeader HeaderCol5 = new TableHeader(5, 0, "Kết quả qua tiếp dân (số vụ việc)", "", ref listTableHeader);
+                TableHeader HeaderCol6 = new TableHeader(6, 0, "Ghi chú", "", ref listTableHeader);
+                //Cấp 2
+                var DataChild2 = new List<TableHeader>();
+                TableHeader HeaderCol21 = new TableHeader(21, 2, "Lượt", "", ref DataChild2);
+                TableHeader HeaderCol22 = new TableHeader(22, 2, "Người", "", ref DataChild2);
+                TableHeader HeaderCol23 = new TableHeader(23, 2, "Vụ việc", "", ref DataChild2);
+                TableHeader HeaderCol24 = new TableHeader(24, 2, "Đoàn đông người", "", ref DataChild2);
+                HeaderCol2.DataChild = DataChild2;
+
+                var DataChild3 = new List<TableHeader>();
+                TableHeader HeaderCol31 = new TableHeader(31, 3, "Lượt", "", ref DataChild2);
+                TableHeader HeaderCol32 = new TableHeader(32, 3, "Người", "", ref DataChild2);
+                TableHeader HeaderCol33 = new TableHeader(33, 3, "Vụ việc", "", ref DataChild2);
+                TableHeader HeaderCol34 = new TableHeader(34, 3, "Đoàn đông người", "", ref DataChild2);
+                HeaderCol3.DataChild = DataChild3;
+
+                var DataChild4 = new List<TableHeader>();
+                TableHeader HeaderCol41 = new TableHeader(41, 4, "Khiếu nại", "", ref DataChild4);
+                TableHeader HeaderCol42 = new TableHeader(42, 4, "Tố cáo", "", ref DataChild4);
+                TableHeader HeaderCol43 = new TableHeader(43, 4, "Phản ảnh, kiến nghị khác", "", ref DataChild4);
+                HeaderCol4.DataChild = DataChild4;
+
+                var DataChild5 = new List<TableHeader>();
+                TableHeader HeaderCol51 = new TableHeader(51, 5, "Chưa được giải quyết", "", ref DataChild5);
+                TableHeader HeaderCol52 = new TableHeader(52, 5, "Đã được giải quyết", "", ref DataChild5);
+                HeaderCol5.DataChild = DataChild5;
+                //Cấp 3
+                var DataChild23 = new List<TableHeader>();
+                TableHeader HeaderCol231 = new TableHeader(231, 23, "Cũ", "", ref DataChild23);
+                TableHeader HeaderCol232 = new TableHeader(232, 23, "Mới phát sinh", "", ref DataChild23);
+                HeaderCol23.DataChild = DataChild23;
+
+                var DataChild24 = new List<TableHeader>();
+                TableHeader HeaderCol241 = new TableHeader(241, 24, "Số đoàn", "", ref DataChild24);
+                TableHeader HeaderCol242 = new TableHeader(242, 24, "Người", "", ref DataChild24);
+                TableHeader HeaderCol243 = new TableHeader(243, 24, "Vụ việc", "", ref DataChild24);
+                HeaderCol24.DataChild = DataChild24;
+
+
+                var DataChild33 = new List<TableHeader>();
+                TableHeader HeaderCol331 = new TableHeader(231, 23, "Cũ", "", ref DataChild33);
+                TableHeader HeaderCol332 = new TableHeader(232, 23, "Mới phát sinh", "", ref DataChild33);
+                HeaderCol33.DataChild = DataChild33;
+
+                var DataChild34 = new List<TableHeader>();
+                TableHeader HeaderCol341 = new TableHeader(341, 34, "Số đoàn", "", ref DataChild34);
+                TableHeader HeaderCol342 = new TableHeader(342, 34, "Người", "", ref DataChild34);
+                TableHeader HeaderCol343 = new TableHeader(343, 34, "Vụ việc", "", ref DataChild34);
+                HeaderCol34.DataChild = DataChild34;
+
+                var DataChild41 = new List<TableHeader>();
+                TableHeader HeaderCol411 = new TableHeader(411, 41, "Lĩnh vực hành chính", "", ref DataChild41);
+                TableHeader HeaderCol412 = new TableHeader(412, 41, "Lĩnh vực Tư pháp", "", ref DataChild41);
+                TableHeader HeaderCol413 = new TableHeader(413, 41, "Lĩnh vực CT, VH, XH khác", "", ref DataChild41);
+                HeaderCol41.DataChild = DataChild41;
+
+                var DataChild42 = new List<TableHeader>();
+                TableHeader HeaderCol421 = new TableHeader(421, 42, "Lĩnh vực hành chính", "", ref DataChild42);
+                TableHeader HeaderCol422 = new TableHeader(422, 42, "Lĩnh vực Tư pháp", "", ref DataChild42);
+                TableHeader HeaderCol423 = new TableHeader(423, 42, "Tham nhũng", "", ref DataChild42);
+                HeaderCol42.DataChild = DataChild42;
+
+                var DataChild52 = new List<TableHeader>();
+                TableHeader HeaderCol521 = new TableHeader(521, 52, "Chưa có QĐ giải quyết", "", ref DataChild52);
+                TableHeader HeaderCol522 = new TableHeader(522, 52, "Đã có QĐ giải quyết (lần 1,2, cuối cùng)", "", ref DataChild52);
+                TableHeader HeaderCol523 = new TableHeader(523, 52, "Đã có bản án của tòa", "", ref DataChild52);
+                HeaderCol52.DataChild = DataChild52;
+
+                
+                //Cấp 4
+                var DataChild411 = new List<TableHeader>();
+                TableHeader HeaderCol4111 = new TableHeader(4111, 411, "Về tranh chấp, đòi đất cũ, đền bù, giải tỏa", "", ref DataChild411);
+                TableHeader HeaderCol4112 = new TableHeader(4112, 411, "Về chính sách", "", ref DataChild411);
+                TableHeader HeaderCol4113 = new TableHeader(4113, 411, "Về nhà, tài sản", "", ref DataChild411);
+                HeaderCol411.DataChild = DataChild411;
+
+                var DataChild243 = new List<TableHeader>();
+                TableHeader HeaderCol2431 = new TableHeader(2431, 243, "Cũ", "", ref DataChild243);
+                TableHeader HeaderCol2432 = new TableHeader(2432, 243, "Mới phát sinh", "", ref DataChild243);
+                HeaderCol243.DataChild = DataChild243;
+
+                var DataChild343 = new List<TableHeader>();
+                TableHeader HeaderCol3431 = new TableHeader(3431, 343, "Cũ", "", ref DataChild343);
+                TableHeader HeaderCol3432 = new TableHeader(3432, 343, "Mới phát sinh", "", ref DataChild343);
+                HeaderCol243.DataChild = DataChild343;
+
+                BaoCaoModel.DataTable.TableHeader = listTableHeader;
+                #endregion
+                #region TableData 
+                TableData Row1 = new TableData();
+                Row1.ID = 1;
+                Row1.isClick = false;
+                var DataArr = new List<RowItem>();
+                RowItem RowItem1 = new RowItem(1, "", "", "", null, "width: 215px", ref DataArr);
+                RowItem RowItem2 = new RowItem(2, "1", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem3 = new RowItem(3, "2", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem4 = new RowItem(4, "3", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem5 = new RowItem(5, "4", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem6 = new RowItem(6, "5", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem7 = new RowItem(7, "6", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem8 = new RowItem(8, "7", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem9 = new RowItem(9, "8", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem10 = new RowItem(10, "9", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem11 = new RowItem(11, "10", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem12 = new RowItem(12, "11", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem13 = new RowItem(13, "12", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem14 = new RowItem(14, "13", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem15 = new RowItem(15, "14", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem16 = new RowItem(16, "15", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem17 = new RowItem(17, "16", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem18 = new RowItem(18, "17", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem19 = new RowItem(19, "18", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem20 = new RowItem(20, "19", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem21 = new RowItem(21, "20", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem22 = new RowItem(22, "21", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem23 = new RowItem(23, "22", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem24 = new RowItem(24, "23", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem25 = new RowItem(25, "24", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem26 = new RowItem(26, "25", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem27 = new RowItem(27, "26", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem28 = new RowItem(28, "27", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem29 = new RowItem(29, "28", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem30 = new RowItem(30, "29", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem31 = new RowItem(31, "30", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem32 = new RowItem(32, "31", "", "", null, "text-align: center;width: 300px", ref DataArr);
+
+                Row1.DataArr = DataArr;
+                BaoCaoModel.DataTable.TableData.Add(Row1);
+
+                BaoCaoModel.DataTable.TableHeader = listTableHeader;
+                #endregion
+                #region TableData 
+
+                List<ThongKeBC_2a_DongBo_IOC> data = new List<ThongKeBC_2a_DongBo_IOC>();
+                p.ListCapID = p.ListCapIDStr.Split(',').Select(int.Parse).ToList();
+                data = new BaoCao2aDAL().BC2a(p.ListCapID, ContentRootPath, RoleID, CapID, CoQuanDangNhapID, CanBoDangNhapID, TinhDangNhapID, HuyenDangNhapID, p.TuNgay ?? DateTime.Now, p.DenNgay ?? DateTime.Now);
+                //BaoCaoModel.DataTable.TableData.AddRange(data);
+
+                #endregion
+                Result.Status = 1;
+                Result.Data = data;
+            }
+            catch (Exception ex)
+            {
+                Result.Status = -1;
+                Result.Message = ex.ToString();
+                Result.Data = null;
+            }
+            return Result;
+        }
+        public BaseResultModel BaoCao2b_IOC(BaseReportParams p, string ContentRootPath, int RoleID, int CapID, int CoQuanDangNhapID, int CanBoDangNhapID, int TinhDangNhapID, int HuyenDangNhapID)
+        {
+            var Result = new BaseResultModel();
+            try
+            {
+                BaoCaoModel BaoCaoModel = new BaoCaoModel();
+                BaoCaoModel.BieuSo = "";
+                BaoCaoModel.ThongTinSoLieu = "Số liệu tính từ ngày " + (p.TuNgay ?? DateTime.Now).ToString("dd/MM/yyyy") + " đến ngày " + (p.DenNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.TuNgay = (p.TuNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.DenNgay = (p.DenNgay ?? DateTime.Now).ToString("dd/MM/yyyy");
+                BaoCaoModel.Title = "BÁO CÁO 2b";
+                BaoCaoModel.DataTable = new DataTable();
+                BaoCaoModel.DataTable.TableHeader = new List<TableHeader>();
+                BaoCaoModel.DataTable.TableData = new List<TableData>();
+                #region Header
+                var listTableHeader = new List<TableHeader>();
+                //Cấp 1
+                TableHeader HeaderCol1 = new TableHeader(1, 0, "Đơn vị", "width: 215px", ref listTableHeader);
+                TableHeader HeaderCol2 = new TableHeader(2, 0, "Tiếp thường xuyên", "", ref listTableHeader);
+                TableHeader HeaderCol3 = new TableHeader(3, 0, "Tiếp định kỳ và đột xuất của Lãnh đạo", "", ref listTableHeader);
+                TableHeader HeaderCol4 = new TableHeader(4, 0, "Nội dung tiếp công dân (số vụ việc)", "", ref listTableHeader);
+                TableHeader HeaderCol5 = new TableHeader(5, 0, "Kết quả qua tiếp dân (số vụ việc)", "", ref listTableHeader);
+                TableHeader HeaderCol6 = new TableHeader(6, 0, "Ghi chú", "", ref listTableHeader);
+                //Cấp 2
+                var DataChild2 = new List<TableHeader>();
+                TableHeader HeaderCol21 = new TableHeader(21, 2, "Lượt", "", ref DataChild2);
+                TableHeader HeaderCol22 = new TableHeader(22, 2, "Người", "", ref DataChild2);
+                TableHeader HeaderCol23 = new TableHeader(23, 2, "Vụ việc", "", ref DataChild2);
+                TableHeader HeaderCol24 = new TableHeader(24, 2, "Đoàn đông người", "", ref DataChild2);
+                HeaderCol2.DataChild = DataChild2;
+
+                var DataChild3 = new List<TableHeader>();
+                TableHeader HeaderCol31 = new TableHeader(31, 3, "Lượt", "", ref DataChild2);
+                TableHeader HeaderCol32 = new TableHeader(32, 3, "Người", "", ref DataChild2);
+                TableHeader HeaderCol33 = new TableHeader(33, 3, "Vụ việc", "", ref DataChild2);
+                TableHeader HeaderCol34 = new TableHeader(34, 3, "Đoàn đông người", "", ref DataChild2);
+                HeaderCol3.DataChild = DataChild3;
+
+                var DataChild4 = new List<TableHeader>();
+                TableHeader HeaderCol41 = new TableHeader(41, 4, "Khiếu nại", "", ref DataChild4);
+                TableHeader HeaderCol42 = new TableHeader(42, 4, "Tố cáo", "", ref DataChild4);
+                TableHeader HeaderCol43 = new TableHeader(43, 4, "Phản ảnh, kiến nghị khác", "", ref DataChild4);
+                HeaderCol4.DataChild = DataChild4;
+
+                var DataChild5 = new List<TableHeader>();
+                TableHeader HeaderCol51 = new TableHeader(51, 5, "Chưa được giải quyết", "", ref DataChild5);
+                TableHeader HeaderCol52 = new TableHeader(52, 5, "Đã được giải quyết", "", ref DataChild5);
+                HeaderCol5.DataChild = DataChild5;
+                //Cấp 3
+                var DataChild23 = new List<TableHeader>();
+                TableHeader HeaderCol231 = new TableHeader(231, 23, "Cũ", "", ref DataChild23);
+                TableHeader HeaderCol232 = new TableHeader(232, 23, "Mới phát sinh", "", ref DataChild23);
+                HeaderCol23.DataChild = DataChild23;
+
+                var DataChild24 = new List<TableHeader>();
+                TableHeader HeaderCol241 = new TableHeader(241, 24, "Số đoàn", "", ref DataChild24);
+                TableHeader HeaderCol242 = new TableHeader(242, 24, "Người", "", ref DataChild24);
+                TableHeader HeaderCol243 = new TableHeader(243, 24, "Vụ việc", "", ref DataChild24);
+                HeaderCol24.DataChild = DataChild24;
+
+
+                var DataChild33 = new List<TableHeader>();
+                TableHeader HeaderCol331 = new TableHeader(231, 23, "Cũ", "", ref DataChild33);
+                TableHeader HeaderCol332 = new TableHeader(232, 23, "Mới phát sinh", "", ref DataChild33);
+                HeaderCol33.DataChild = DataChild33;
+
+                var DataChild34 = new List<TableHeader>();
+                TableHeader HeaderCol341 = new TableHeader(341, 34, "Số đoàn", "", ref DataChild34);
+                TableHeader HeaderCol342 = new TableHeader(342, 34, "Người", "", ref DataChild34);
+                TableHeader HeaderCol343 = new TableHeader(343, 34, "Vụ việc", "", ref DataChild34);
+                HeaderCol34.DataChild = DataChild34;
+
+                var DataChild41 = new List<TableHeader>();
+                TableHeader HeaderCol411 = new TableHeader(411, 41, "Lĩnh vực hành chính", "", ref DataChild41);
+                TableHeader HeaderCol412 = new TableHeader(412, 41, "Lĩnh vực Tư pháp", "", ref DataChild41);
+                TableHeader HeaderCol413 = new TableHeader(413, 41, "Lĩnh vực CT, VH, XH khác", "", ref DataChild41);
+                HeaderCol41.DataChild = DataChild41;
+
+                var DataChild42 = new List<TableHeader>();
+                TableHeader HeaderCol421 = new TableHeader(421, 42, "Lĩnh vực hành chính", "", ref DataChild42);
+                TableHeader HeaderCol422 = new TableHeader(422, 42, "Lĩnh vực Tư pháp", "", ref DataChild42);
+                TableHeader HeaderCol423 = new TableHeader(423, 42, "Tham nhũng", "", ref DataChild42);
+                HeaderCol42.DataChild = DataChild42;
+
+                var DataChild52 = new List<TableHeader>();
+                TableHeader HeaderCol521 = new TableHeader(521, 52, "Chưa có QĐ giải quyết", "", ref DataChild52);
+                TableHeader HeaderCol522 = new TableHeader(522, 52, "Đã có QĐ giải quyết (lần 1,2, cuối cùng)", "", ref DataChild52);
+                TableHeader HeaderCol523 = new TableHeader(523, 52, "Đã có bản án của tòa", "", ref DataChild52);
+                HeaderCol52.DataChild = DataChild52;
+
+
+                //Cấp 4
+                var DataChild411 = new List<TableHeader>();
+                TableHeader HeaderCol4111 = new TableHeader(4111, 411, "Về tranh chấp, đòi đất cũ, đền bù, giải tỏa", "", ref DataChild411);
+                TableHeader HeaderCol4112 = new TableHeader(4112, 411, "Về chính sách", "", ref DataChild411);
+                TableHeader HeaderCol4113 = new TableHeader(4113, 411, "Về nhà, tài sản", "", ref DataChild411);
+                HeaderCol411.DataChild = DataChild411;
+
+                var DataChild243 = new List<TableHeader>();
+                TableHeader HeaderCol2431 = new TableHeader(2431, 243, "Cũ", "", ref DataChild243);
+                TableHeader HeaderCol2432 = new TableHeader(2432, 243, "Mới phát sinh", "", ref DataChild243);
+                HeaderCol243.DataChild = DataChild243;
+
+                var DataChild343 = new List<TableHeader>();
+                TableHeader HeaderCol3431 = new TableHeader(3431, 343, "Cũ", "", ref DataChild343);
+                TableHeader HeaderCol3432 = new TableHeader(3432, 343, "Mới phát sinh", "", ref DataChild343);
+                HeaderCol243.DataChild = DataChild343;
+
+                BaoCaoModel.DataTable.TableHeader = listTableHeader;
+                #endregion
+                #region TableData 
+                TableData Row1 = new TableData();
+                Row1.ID = 1;
+                Row1.isClick = false;
+                var DataArr = new List<RowItem>();
+                RowItem RowItem1 = new RowItem(1, "", "", "", null, "width: 215px", ref DataArr);
+                RowItem RowItem2 = new RowItem(2, "1", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem3 = new RowItem(3, "2", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem4 = new RowItem(4, "3", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem5 = new RowItem(5, "4", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem6 = new RowItem(6, "5", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem7 = new RowItem(7, "6", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem8 = new RowItem(8, "7", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem9 = new RowItem(9, "8", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem10 = new RowItem(10, "9", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem11 = new RowItem(11, "10", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem12 = new RowItem(12, "11", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem13 = new RowItem(13, "12", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem14 = new RowItem(14, "13", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem15 = new RowItem(15, "14", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem16 = new RowItem(16, "15", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem17 = new RowItem(17, "16", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem18 = new RowItem(18, "17", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem19 = new RowItem(19, "18", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem20 = new RowItem(20, "19", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem21 = new RowItem(21, "20", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem22 = new RowItem(22, "21", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem23 = new RowItem(23, "22", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem24 = new RowItem(24, "23", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem25 = new RowItem(25, "24", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem26 = new RowItem(26, "25", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem27 = new RowItem(27, "26", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem28 = new RowItem(28, "27", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem29 = new RowItem(29, "28", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem30 = new RowItem(30, "29", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem31 = new RowItem(31, "30", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem32 = new RowItem(32, "31", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem33 = new RowItem(33, "32", "", "", null, "text-align: center;width: 100px", ref DataArr);
+                RowItem RowItem34 = new RowItem(34, "33", "", "", null, "text-align: center;width: 300px", ref DataArr);
+
+                Row1.DataArr = DataArr;
+                BaoCaoModel.DataTable.TableData.Add(Row1);
+
+                BaoCaoModel.DataTable.TableHeader = listTableHeader;
+                #endregion
+                #region TableData 
+
+                List<ThongKeBC_2b_DongBo_IOC> data = new List<ThongKeBC_2b_DongBo_IOC>();
+                p.ListCapID = p.ListCapIDStr.Split(',').Select(int.Parse).ToList();
+                data = new BaoCao2bDAL().BC2b(p.ListCapID, ContentRootPath, RoleID, CapID, CoQuanDangNhapID, CanBoDangNhapID, TinhDangNhapID, HuyenDangNhapID, p.TuNgay ?? DateTime.Now, p.DenNgay ?? DateTime.Now);
+                //BaoCaoModel.DataTable.TableData.AddRange(data);
+
+                #endregion
+                Result.Status = 1;
+                Result.Data = data;
+            }
+            catch (Exception ex)
+            {
+                Result.Status = -1;
+                Result.Message = ex.ToString();
+                Result.Data = null;
+            }
+            return Result;
+        }
     }
 }

@@ -76,8 +76,8 @@ namespace Com.Gosol.KNTC.DAL.HeThong
                     }
                     dr.Close();
                     Result = (from m in list
-                              group m by new { m.ChucNangID, m.TenChucNang, m.MaChucNang } into chucNang
-                              select new ChucNangModel(chucNang.Key.ChucNangID, chucNang.Key.TenChucNang, chucNang.Key.MaChucNang, list.Where(x => x.ChucNangID == chucNang.Key.ChucNangID).ToList().Max(x => x.Quyen))
+                              group m by new { m.ChucNangID, m.TenChucNang , m.MaChucNang} into chucNang
+                              select new ChucNangModel(chucNang.Key.ChucNangID, chucNang.Key.TenChucNang,chucNang.Key.MaChucNang, list.Where(x => x.ChucNangID == chucNang.Key.ChucNangID).ToList().Max(x => x.Quyen))
                               ).ToList();
 
                 }
@@ -108,10 +108,10 @@ namespace Com.Gosol.KNTC.DAL.HeThong
                         item.TenMenu = Utils.ConvertToString(dr["TenChucNang"], string.Empty);
                         item.MaMenu = Utils.ConvertToString(dr["MaChucNang"], String.Empty);
                         item.MenuChaID = Utils.ConvertToInt32(dr["ChucNangChaID"], 0);
-                        item.ThuTuSapXep = Utils.ConvertToInt32(dr["ThuTuSapXep"], 0);
-                        item.Icon = Utils.ConvertToString(dr["Icon"], String.Empty);
-                        item.HienThi = Utils.ConvertToBoolean(dr["HienThiTrenMenu"], false);
-                        item.isHover = Utils.ConvertToBoolean(dr["isHover"], false);
+                        //item.ThuTuSapXep = Utils.ConvertToInt32(dr["ThuTuSapXep"], 0);
+                        //item.Icon = Utils.ConvertToString(dr["Icon"], String.Empty);
+                        item.HienThi = true;
+                        //item.isHover = Utils.ConvertToBoolean(dr["isHover"], false);
                         //item.ViewOnly = Utils.ConvertToBoolean(dr["ViewOnly"], false);
                         Result.Add(item);
                     }
@@ -159,7 +159,7 @@ namespace Com.Gosol.KNTC.DAL.HeThong
                         ChucNangModel item = new ChucNangModel();
                         item.ChucNangID = Utils.ConvertToInt32(dr["ChucNangID"], 0);
                         item.TenChucNang = Utils.ConvertToString(dr["TenChucNang"], string.Empty);
-                        item.MaChucNang = Utils.ConvertToString(dr["MaChucNang"], string.Empty);
+                        //item.MaChucNang = Utils.ConvertToString(dr["MaChucNang"], string.Empty);
                         item.ChucNangChaID = Utils.ConvertToInt32(dr["ChucNangChaID"], 0);
                         item.TenChucNangCha = Utils.ConvertToString(dr["TenChucNangCha"], string.Empty);
                         list.Add(item);

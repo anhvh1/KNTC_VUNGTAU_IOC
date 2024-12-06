@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1782,6 +1784,82 @@ namespace Com.Gosol.KNTC.Ultilities
         public DateTime ToSolarDate()
         {
             return ToSolarDate(7);
+        }
+
+    }
+    public static class DataAccessHelper
+    {
+        public static List<TEntity> MapToList<TEntity>(SqlDataReader reader) where TEntity : new()
+        {
+            var entities = new List<TEntity>();
+            var properties = typeof(TEntity).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            while (reader.Read())
+            {
+                var entity = new TEntity();
+                foreach (var property in properties)
+                {
+                    try
+                    {
+                        if (!reader.HasColumn(property.Name) || reader[property.Name] == DBNull.Value)
+                            continue;
+
+                        if (property.CanWrite)
+                        {
+                            // Set the value of the property
+                            //property.SetValue(entity, Convert.ChangeType(reader[property.Name], property.PropertyType));
+                            property.SetValue(entity, reader[property.Name]);
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
+                }
+                entities.Add(entity);
+            }
+            //reader.Close();
+
+            return entities;
+        }
+
+        public static void SetSqlCommandParameters(SqlCommand cmd, Dictionary<string, object> parameters)
+        {
+            foreach (var parameter in parameters)
+            {
+                var value = parameter.Value;
+                if (value is string stringValue)
+                {
+                    value = stringValue.Trim(); // Ch? lo?i b? kho?ng tr?ng ? cu?i
+                }
+                cmd.Parameters.AddWithValue(parameter.Key, value ?? DBNull.Value);
+            }
+        }
+
+        public static void AddParameter(SqlCommand cmd, string parameterName, SqlDbType dbType, object value, int? size = null)
+        {
+            var parameter = new SqlParameter(parameterName, dbType)
+            {
+                Value = value ?? DBNull.Value
+            };
+
+            if (size.HasValue)
+            {
+                parameter.Size = size.Value;
+            }
+
+            cmd.Parameters.Add(parameter);
+        }
+
+        private static bool HasColumn(this SqlDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
         }
     }
 }
