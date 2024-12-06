@@ -121,5 +121,125 @@ namespace Com.Gosol.KNTC.Models.BaoCao
             this.ListTotal = ListTotal;
             DataArr.Add(this);
         }
+        
+    }
+    public class ThongKeBC_DongBo_IOC
+    {
+        public long? Id { get; set; }
+        public int? CoQuanId { get; set; }
+        public string? TenCoQuan { get; set; }
+        public int? TongSoLuotTCD { get; set; }
+        public int? TongSoLuotTTX { get; set; }
+        public int? TongSoLuotTTT { get; set; }
+        public int? TongSoLuotUQT { get; set; }
+        public int? TongSoDonXLD { get; set; }
+        public int? TSDXLDThuocThamQuyen { get; set; }
+        public int? TSDXLDKhongThuocThamQuyen { get; set; }
+        public int? TSDXLDToCao { get; set; }
+        public int? TSDXLDToCaoThuocThamQuyen { get; set; }
+        public int? TSDXLDKhieuNai { get; set; }
+        public int? TSDXLDKhieuNaiThuocThamQuyen { get; set; }
+        public int? TSDXLDKhienNghiPhanAnh { get; set; }
+        public int? TSDXLDKhienNghiPhanAnhTTQ { get; set; }
+        public int? LoaiBaoCao { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+        public int? NgayTao { get; set; }
+        public int? NguoiTao { get; set; }
+        public int? NgaySua { get; set; }
+        public int? NguoiSua { get; set; }
+    }
+
+    public class ThongKeBC_2a_DongBo_IOC
+    {
+        public long Id { get; set; }
+        public int? CoQuanId { get; set; }
+        public string? TenCoQuan { get; set; }
+        public int? TongSoLuotTCD { get; set; }
+        public int? TongSoLuotTTX { get; set; }
+        public int? TongSoLuotTTT { get; set; }
+        public int? TongSoLuotUQT { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
+    }
+    public class ThongKeBC_2a_DongBo_IOC_Request
+    {
+        public int? CoQuanId { get; set; }
+        public int? TongSoLuotTCD { get; set; }
+        public int? TongSoLuotTTX { get; set; }
+        public int? TongSoLuotTTT { get; set; }
+        public int? TongSoLuotUQT { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
+    }
+    public class ThongKeBC_2a_DongBo_IOC_UpdateRequest
+    {
+        public long Id { get; set; }
+        public int? CoQuanId { get; set; }
+        public int? TongSoLuotTCD { get; set; }
+        public int? TongSoLuotTTX { get; set; }
+        public int? TongSoLuotTTT { get; set; }
+        public int? TongSoLuotUQT { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
+    }
+    public class ThongKeBC_2b_DongBo_IOC
+    {
+        public long Id { get; set; }
+        public int? CoQuanId { get; set; }
+        public string? TenCoQuan { get; set; }
+        public int? TongSoDonXLD { get; set; }
+        public int? TSDXLDThuocThamQuyen { get; set; }
+        public int? TSDXLDKhongThuocThamQuyen { get; set; }
+        public int? TSDXLDToCao { get; set; }
+        public int? TSDXLDToCaoThuocThamQuyen { get; set; }
+        public int? TSDXLDKhieuNai { get; set; }
+        public int? TSDXLDKhieuNaiThuocThamQuyen { get; set; }
+        public int? TSDXLDKienNghiPhanAnh { get; set; }
+        public int? TSDXLDKienNghiPhanAnhTTQ { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
+    }
+    public class FilterDongBo_IOC
+    {
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+    }
+    public class ThongKeBC_2b_DongBo_IOC_Request
+    {
+        public int? CoQuanId { get; set; }
+        public int? TongSoDonXLD { get; set; }
+        public int? TSDXLDThuocThamQuyen { get; set; }
+        public int? TSDXLDKhongThuocThamQuyen { get; set; }
+        public int? TSDXLDToCao { get; set; }
+        public int? TSDXLDToCaoThuocThamQuyen { get; set; }
+        public int? TSDXLDKhieuNai { get; set; }
+        public int? TSDXLDKhieuNaiThuocThamQuyen { get; set; }
+        public int? TSDXLDKienNghiPhanAnh { get; set; }
+        public int? TSDXLDKienNghiPhanAnhTTQ { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
+    }
+    public class ThongKeBC_2b_DongBo_IOC_UpdateRequest
+    {
+        public long Id { get; set; }
+        public int? CoQuanId { get; set; }
+        public int? TongSoDonXLD { get; set; }
+        public int? TSDXLDThuocThamQuyen { get; set; }
+        public int? TSDXLDKhongThuocThamQuyen { get; set; }
+        public int? TSDXLDToCao { get; set; }
+        public int? TSDXLDToCaoThuocThamQuyen { get; set; }
+        public int? TSDXLDKhieuNai { get; set; }
+        public int? TSDXLDKhieuNaiThuocThamQuyen { get; set; }
+        public int? TSDXLDKienNghiPhanAnh { get; set; }
+        public int? TSDXLDKienNghiPhanAnhTTQ { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
+
     }
 }

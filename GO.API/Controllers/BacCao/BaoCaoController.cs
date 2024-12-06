@@ -1,4 +1,5 @@
-﻿using Com.Gosol.KNTC.API.Config;
+﻿using Com.Gosol.KNTC.API.Authorization;
+using Com.Gosol.KNTC.API.Config;
 using Com.Gosol.KNTC.API.Controllers;
 using Com.Gosol.KNTC.API.Controllers.DanhMuc;
 using Com.Gosol.KNTC.API.Formats;
@@ -14,6 +15,7 @@ using Com.Gosol.KNTC.Security;
 using Com.Gosol.KNTC.Ultilities;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -45,7 +47,7 @@ namespace GO.API.Controllers.BacCao
                 int TotalRow = 0;
                 IList<LoaiKhieuToInfo> Data;
                 Data = _BaoCaoBUS.DanhMucLoaiKhieuTo(LoaiKhieuToID ?? 0);
-               
+
                 base.Status = 1;
                 base.TotalRow = TotalRow;
                 base.Data = Data;
@@ -116,14 +118,15 @@ namespace GO.API.Controllers.BacCao
                     var listThanhTraTinh = new SystemConfigDAL().GetByKey("Thanh_Tra_Tinh_ID").ConfigValue.Split(',').ToList().Select(x => Utils.ConvertToInt32(x.ToString(), 0)).ToList();
                     if (Type == 2)
                     {
-                        if ((listThanhTraTinh.Contains(CoQuanID) && RoleID == EnumChucVu.LanhDao.GetHashCode()) 
-                        || (RoleID == (int)CapQuanLy.CapUBNDTinh && RoleID == EnumChucVu.LanhDao.GetHashCode()) 
+                        if ((listThanhTraTinh.Contains(CoQuanID) && RoleID == EnumChucVu.LanhDao.GetHashCode())
+                        || (RoleID == (int)CapQuanLy.CapUBNDTinh && RoleID == EnumChucVu.LanhDao.GetHashCode())
                         || CapID == (int)CapQuanLy.CapTrungUong)
                         {
                             list.Add(new PhamViModel("Toàn tỉnh", 2));
                             list.Add(new PhamViModel("Trong đơn vị", 5));
                         }
-                        else {
+                        else
+                        {
                             list.Add(new PhamViModel("Trong đơn vị", 5));
                         }
 
@@ -164,12 +167,12 @@ namespace GO.API.Controllers.BacCao
                 List<CoQuanInfo> resultList = new List<CoQuanInfo>();
                 if (PhamViID == 3)
                 {
-                    List<CoQuanInfo> cqList = new CoQuan().GetCoQuanByCap((int)CapQuanLy.CapSoNganh).ToList();         
+                    List<CoQuanInfo> cqList = new CoQuan().GetCoQuanByCap((int)CapQuanLy.CapSoNganh).ToList();
                     foreach (CoQuanInfo cqInfo in cqList)
                     {
                         resultList.Add(cqInfo);
                     }
-                
+
                 }
                 else if (PhamViID == 4)
                 {
@@ -233,10 +236,10 @@ namespace GO.API.Controllers.BacCao
             {
                 return CreateActionResult(false, "", EnumLogType.GetList, () =>
                 {
-                    if(p.ListCapIDStr != null && p.ListCapIDStr.Length > 0)
+                    if (p.ListCapIDStr != null && p.ListCapIDStr.Length > 0)
                     {
                         var arr = p.ListCapIDStr.Split(",");
-                        if(arr != null && arr.Length > 0)
+                        if (arr != null && arr.Length > 0)
                         {
                             p.ListCapID = new List<int>();
                             foreach (var item in arr)
@@ -278,13 +281,13 @@ namespace GO.API.Controllers.BacCao
             try
             {
                 return CreateActionResult(false, "", EnumLogType.GetList, () =>
-                { 
-                    if(p.CapID == null || p.CoQuanID == null) return base.GetActionResult();
+                {
+                    if (p.CapID == null || p.CoQuanID == null) return base.GetActionResult();
 
                     string ContentRootPath = _host.ContentRootPath;
                     var RoleID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "RoleID").Value, 0);
                     var CapID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CapID").Value, 0);
-                  
+
                     if (p.CanBoID == null || p.CanBoID == 0) p.CanBoID = CanBoID;
                     RoleID = EnumChucVu.LanhDao.GetHashCode();
                     var Data = _BaoCaoBUS.TCD01_GetDSChiTietDonThu(ContentRootPath, p);
@@ -373,7 +376,7 @@ namespace GO.API.Controllers.BacCao
         //        throw;
         //    }
         //}
- 
+
         [HttpGet]
         //[CustomAuthAttribute(ChucNangEnum.BaoCao, AccessLevel.Read)]
         [Route("TCD02")]
@@ -552,7 +555,7 @@ namespace GO.API.Controllers.BacCao
                 return CreateActionResult(false, "", EnumLogType.GetList, () =>
                 {
                     if (p.CapID == null || p.CoQuanID == null) return base.GetActionResult();
-                    string ContentRootPath = _host.ContentRootPath;      
+                    string ContentRootPath = _host.ContentRootPath;
                     if (p.CanBoID == null || p.CanBoID == 0) p.CanBoID = CanBoID;
                     var Data = _BaoCaoBUS.XLD01_GetDSChiTietDonThu(ContentRootPath, p);
                     base.Status = Data.Status;
@@ -1711,7 +1714,7 @@ namespace GO.API.Controllers.BacCao
                     }
                     else if (p.Type == 7)
                     {
-                      
+
                     }
                     else if (p.Type == 8)
                     {
@@ -1849,7 +1852,7 @@ namespace GO.API.Controllers.BacCao
                     }
                     else if (p.Type == 6)
                     {
-                        
+
                     }
                     else if (p.Type == 7)
                     {
@@ -1917,7 +1920,7 @@ namespace GO.API.Controllers.BacCao
                         if (p.CanBoID == null || p.CanBoID == 0) p.CanBoID = CanBoID;
                         Data = _BaoCaoBUS.KQGQ04_XuatExcel(p, ContentRootPath, IdentityHelper.RoleID ?? 0, IdentityHelper.CapID ?? 0, IdentityHelper.CoQuanID ?? 0, IdentityHelper.CanBoID ?? 0, IdentityHelper.TinhID ?? 0, IdentityHelper.HuyenID ?? 0);
                     }
-                    
+
                     base.Status = Data.Status;
                     base.Data = serverPath + Data.Data;
                     base.Message = Data.Message;
@@ -1949,7 +1952,7 @@ namespace GO.API.Controllers.BacCao
                     var CapID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CapID").Value, 0);
                     var CoQuanDangNhapID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CoQuanID").Value, 0);
 
-                    IdentityHelper IdentityHelper = new IdentityHelper(); 
+                    IdentityHelper IdentityHelper = new IdentityHelper();
                     IdentityHelper.RoleID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "RoleID").Value, 0);
                     IdentityHelper.CapID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CapID").Value, 0);
                     IdentityHelper.CoQuanID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CoQuanID").Value, 0);
@@ -2100,5 +2103,40 @@ namespace GO.API.Controllers.BacCao
                 throw;
             }
         }
+
+        [HttpGet]
+        [CustomAuth(ChucNangEnum.TongHopKetQuaTiepCongDan, AccessLevel.Read)]
+        [Route("BaoCao2a_IOC")]
+        public IActionResult BaoCao2a_IOC([FromQuery] BaseReportParams p)
+        {
+            return CreateActionResult(false, "", EnumLogType.GetList, () =>
+            {
+                IdentityHelper IdentityHelper = new IdentityHelper();
+                string ContentRootPath = _host.ContentRootPath;
+                IdentityHelper.RoleID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "RoleID").Value, 0);
+                IdentityHelper.CapID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CapID").Value, 0);
+                IdentityHelper.CoQuanID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CoQuanID").Value, 0);
+                IdentityHelper.CanBoID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "CanBoID").Value, 0);
+                IdentityHelper.TinhID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "TinhID").Value, 0);
+                IdentityHelper.HuyenID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "HuyenID").Value, 0);
+                IdentityHelper.XaID = Utils.ConvertToInt32(User.Claims.FirstOrDefault(c => c.Type == "XaID").Value, 0);
+                IdentityHelper.RoleID = EnumChucVu.LanhDao.GetHashCode();
+                BaseResultModel Data = new BaseResultModel();
+                // báo cáo 2a
+                if (p.Type == 12)
+                {
+                    Data = _BaoCaoBUS.BaoCao2a_IOC(p, ContentRootPath, IdentityHelper.RoleID ?? 0, IdentityHelper.CapID ?? 0, IdentityHelper.CoQuanID ?? 0, IdentityHelper.CanBoID ?? 0, IdentityHelper.TinhID ?? 0, IdentityHelper.HuyenID ?? 0);
+                }
+                // báo cáo 2b
+                else if (p.Type == 11)
+                {
+                    Data = _BaoCaoBUS.BaoCao2b_IOC(p, ContentRootPath, IdentityHelper.RoleID ?? 0, IdentityHelper.CapID ?? 0, IdentityHelper.CoQuanID ?? 0, IdentityHelper.CanBoID ?? 0, IdentityHelper.TinhID ?? 0, IdentityHelper.HuyenID ?? 0);
+                }
+                base.Status = Data.Status;
+                base.Data = Data.Data;
+                return base.GetActionResult();
+            });
+        }
+
     }
 }

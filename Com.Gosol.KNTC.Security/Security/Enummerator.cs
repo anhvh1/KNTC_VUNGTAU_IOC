@@ -117,6 +117,7 @@ namespace Com.Gosol.KNTC.Security
         DashBoard = 800,
 		DashBoardTong = 801,
 
+        TongHopKetQuaTiepCongDan = 51
     }
 
 };

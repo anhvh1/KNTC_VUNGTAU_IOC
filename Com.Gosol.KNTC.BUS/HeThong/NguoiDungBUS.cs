@@ -19,10 +19,22 @@ namespace Com.Gosol.KNTC.BUS.HeThong
         {
             return _NguoiDungDAL.GetInfoByLoginCAS(Mail);
         }
-
+        private NguoiDungModel GetInfoByRefreshToken(int nguoiDungID)
+        {
+            return _NguoiDungDAL.GetInfoByRefreshToken(nguoiDungID);
+        }
         public bool VerifyUser(string UserName, string Password, string Email, ref NguoiDungModel NguoiDung)
         { 
             NguoiDung = GetInfoByLogin(UserName, Password);
+            if (NguoiDung != null && (NguoiDung.TrangThai == 1 || NguoiDung.TrangThai == 0))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool VerifyUserForRefreshToken(int nguoiDungID, ref NguoiDungModel NguoiDung)
+        { 
+            NguoiDung = GetInfoByRefreshToken(nguoiDungID);
             if (NguoiDung != null && (NguoiDung.TrangThai == 1 || NguoiDung.TrangThai == 0))
             {
                 return true;

@@ -2654,7 +2654,7 @@ namespace Com.Gosol.KNTC.DAL.HeThong
                         Result = new ChucNangModel();
                         Result.ChucNangID = Utils.ConvertToInt32(dr["ChucNangID"], 0);
                         Result.TenChucNang = Utils.ConvertToString(dr["TenChucNang"], String.Empty);
-                        Result.MaChucNang = Utils.ConvertToString(dr["MaChucNang"], String.Empty);
+                        //Result.MaChucNang = Utils.ConvertToString(dr["MaChucNang"], String.Empty);
                         Result.Quyen = Utils.ConvertToInt32(dr["Quyen"], 0);
                         Result.PhanQuyenID = Utils.ConvertToInt32(dr["PhanQuyenID"], 0);
                         break;
