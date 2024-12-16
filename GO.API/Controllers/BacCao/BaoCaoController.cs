@@ -2109,7 +2109,7 @@ namespace GO.API.Controllers.BacCao
         [Route("BaoCao2a_IOC")]
         public IActionResult BaoCao2a_IOC([FromQuery] BaseReportParams p)
         {
-            return CreateActionResult(false, "", EnumLogType.GetList, () =>
+            return CreateActionResult("Lấy dữ liệu để đồng bộ", EnumLogType.GetList, () =>
             {
                 IdentityHelper IdentityHelper = new IdentityHelper();
                 string ContentRootPath = _host.ContentRootPath;
@@ -2123,12 +2123,12 @@ namespace GO.API.Controllers.BacCao
                 IdentityHelper.RoleID = EnumChucVu.LanhDao.GetHashCode();
                 BaseResultModel Data = new BaseResultModel();
                 // báo cáo 2a
-                if (p.Type == 12)
+                if (p.Type == 1)
                 {
                     Data = _BaoCaoBUS.BaoCao2a_IOC(p, ContentRootPath, IdentityHelper.RoleID ?? 0, IdentityHelper.CapID ?? 0, IdentityHelper.CoQuanID ?? 0, IdentityHelper.CanBoID ?? 0, IdentityHelper.TinhID ?? 0, IdentityHelper.HuyenID ?? 0);
                 }
                 // báo cáo 2b
-                else if (p.Type == 11)
+                else if (p.Type == 2)
                 {
                     Data = _BaoCaoBUS.BaoCao2b_IOC(p, ContentRootPath, IdentityHelper.RoleID ?? 0, IdentityHelper.CapID ?? 0, IdentityHelper.CoQuanID ?? 0, IdentityHelper.CanBoID ?? 0, IdentityHelper.TinhID ?? 0, IdentityHelper.HuyenID ?? 0);
                 }
